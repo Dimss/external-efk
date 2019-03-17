@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import json
 import http.client
 import os
@@ -66,7 +67,7 @@ if __name__ == '__main__':
         parser.print_help()
         exit(1)
     if args.es_port is None:
-        logging.error("Missing ElasticSearch HOST. Usage example: es-importer.py 127.0.0.1 9200")
+        logging.error("Missing ElasticSearch PORT. Usage example: es-importer.py 127.0.0.1 9200")
         parser.print_help()
         exit(1)
     _set_es_host_and_port(args.es_host, args.es_port)
