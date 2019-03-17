@@ -1,8 +1,8 @@
-###  OpenShift EFK  - external setup 
+#  OpenShift EFK  - external setup 
 This repo describes available options and required steps for 
 connecting OpenShift EFK stack to external ES and Kibana instances.
 
-## Option 1 - Connect FluentD instances to ex external stand alone (not OCP based) ES and Kibana setup
+## Option 1 - Connect FluentD instances to external stand alone (not OCP based) ES and Kibana setup
 - Download and extract ES and Kibana
     ES: https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-13
     Kibana: https://www.elastic.co/downloads/past-releases/kibana-5-6-13
@@ -28,6 +28,11 @@ connecting OpenShift EFK stack to external ES and Kibana instances.
     by parsing the `index_templates` files. 
     As from now we have following patterns names: 
     `[".operations.*", ".all",".orphaned.*","project.*"]`
+- Install EFK on OCP
+    ```bash
+    cd /usr/share/ansible/openshift-ansible
+    ansible-playbook playbooks/openshift-logging/config.yml
+    ```
 - Update FluentD `daemonet` with `oc edit daemonsets logging-fluentd` and set 
     `ES_HOST`, `ES_PORT`, `OPS_HOST`, and `OPS_PORT` to point to IP of the external ES instance. More details [here](https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html#sending-logs-to-an-external-elasticsearch-instance)
 - Update FluentD `daemonet` with `oc edit daemonsets logging-fluentd` and set image to the following value: `image: docker.io/dimssss/ose-logging-fluentd:v3.11.83`. To build your own FluentD image, take a look on custom-fluetd folder in that repo.
