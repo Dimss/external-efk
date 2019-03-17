@@ -1,0 +1,6 @@
+[
+  ".operations.*",
+  ".all",
+  ".orphaned.*",
+  "project.*"
+]
